@@ -12,10 +12,13 @@ markers_board =[]
 clicked_status = False
 clicked_position = []
 
+winner = 0
+game_over = False
+
 player_id = 1  #this will flip between the 2 players as 1 vs -1
 
 x_marker_color = (0,255,0) #green for player 1
-o_marker_color = (50,50,50) #red for player -1
+o_marker_color = (255,0,0) #red for player -1
 
 
 screen = pygame.display.set_mode((screen_width,screen_height))  # initialize the screen: looking for size, flags, depth, display, vsync
@@ -63,6 +66,35 @@ def draw_markers():
             y_pos += 1
         x_pos += 1
 
+def check_winner():
+    global winner ##new lesson on global vars
+    global game_over
+    for index in range(3):
+        if sum(markers_board[index]) == 3:
+            winner = 1
+            game_over = True
+
+        if sum(markers_board[index]) == -3:
+            winner = 2
+            game_over = True
+
+        if markers_board[0][index] + markers_board[1][index] + markers_board[2][index] == 3:
+            winner = 1
+            game_over = True
+
+        if markers_board[0][index] + markers_board[1][index] + markers_board[2][index] == -3:
+            winner = 2
+            game_over = True
+
+    if markers_board[0][0] + markers_board[1][1] + markers_board[2][2] == 3 or markers_board[2][0] + markers_board[1][1] + markers_board[0][2] == 3:
+        winner = 1
+        game_over = True
+
+    if markers_board[0][0] + markers_board[1][1] + markers_board[2][2] == 3 or markers_board[2][0] + markers_board[1][1] + markers_board[0][2] == -3:
+        winner = 2
+        game_over = True
+
+
 run = True
 while run:
     draw_grid()
@@ -86,7 +118,11 @@ while run:
             if markers_board[x_coordinate//square_size][y_coordinate//square_size] == 0:  #checking if this is fresh territory
                 markers_board[x_coordinate // square_size][y_coordinate // square_size] = player_id
                 player_id *= -1  #to flip players
-                print("MOVE WAS MADE ONTO", x_coordinate, y_coordinate)
+
+                check_winner()
+
+        if game_over:
+            run = False
 
     pygame.display.update()
 
