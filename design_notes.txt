@@ -2,10 +2,10 @@ project inspired by:
 https://www.youtube.com/watch?v=KBpfB1qQx8w&ab_channel=CodingWithRuss
 
 #Part 1:
-    #import modules
-    #create blank game window
-    #setup loop w/ exit event handler
-    #create grid and setup grid list
+    #import modules (COMPLETE)
+    #create blank game window (COMPLETE)
+    #setup loop w/ exit event handler (COMPLETE)
+    #create grid and setup grid list (COMPLETE)
 
 
 #Part 2:
