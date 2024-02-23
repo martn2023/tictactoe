@@ -9,9 +9,9 @@ https://www.youtube.com/watch?v=KBpfB1qQx8w&ab_channel=CodingWithRuss
 
 
 #Part 2:
-    #create event handler for clicking on cell
-    #check if cell is empty, then place marker
-    #setup function for drawing markers onto the grid
+    #create event handler for clicking on cell (COMPLETE)
+    #check if cell is empty, then place marker (COMPLETE)
+    #setup function for drawing markers onto the grid (COMPLETE)
 
 #Part 3:
     #create check winner function including checks for winning combinations

@@ -14,6 +14,10 @@ clicked_position = []
 
 player_id = 1  #this will flip between the 2 players as 1 vs -1
 
+x_marker_color = (0,255,0) #green for player 1
+o_marker_color = (50,50,50) #red for player -1
+
+
 screen = pygame.display.set_mode((screen_width,screen_height))  # initialize the screen: looking for size, flags, depth, display, vsync
 pygame.display.set_caption("TicTacToe - By Martin, using PyGame")
 
@@ -31,10 +35,38 @@ for row_count in range(3):
     new_row = [0] * 3
     markers_board.append(new_row)
 
-print("markers", markers_board)
+def draw_markers():
+    x_pos = 0
+    for row in markers_board:
+        y_pos = 0
+        for column in row:
+            if column == 1:
+                pygame.draw.line(
+                    screen,
+                    x_marker_color,
+            (x_pos * square_size +15, y_pos * square_size +15),
+            (x_pos * square_size +85, y_pos * square_size +85),
+                    line_width)
+
+                #need 2 lines to make an X
+                pygame.draw.line(
+                    screen,
+                    x_marker_color,
+                    (x_pos * square_size + 85, y_pos * square_size + 15),
+                    (x_pos * square_size + 15, y_pos * square_size + 85),
+                    line_width)
+
+
+
+            if column == -1:
+                pygame.draw.circle(screen, o_marker_color, (x_pos*square_size+50, y_pos*square_size+50), 38,line_width)
+            y_pos += 1
+        x_pos += 1
+
 run = True
 while run:
     draw_grid()
+    draw_markers()
 
     #add event handler
     for event in pygame.event.get():
@@ -53,7 +85,8 @@ while run:
 
             if markers_board[x_coordinate//square_size][y_coordinate//square_size] == 0:  #checking if this is fresh territory
                 markers_board[x_coordinate // square_size][y_coordinate // square_size] = player_id
-                player_id -= -1  #to flip players
+                player_id *= -1  #to flip players
+                print("MOVE WAS MADE ONTO", x_coordinate, y_coordinate)
 
     pygame.display.update()
 
