@@ -14,6 +14,6 @@ https://www.youtube.com/watch?v=KBpfB1qQx8w&ab_channel=CodingWithRuss
     #setup function for drawing markers onto the grid (COMPLETE)
 
 #Part 3:
-    #create check winner function including checks for winning combinations
-    #create event handler for post-game
+    #create check winner function including checks for winning combinations (COMPLETE)
+    #create event handler for post-game (STRUGGLE WITH FLICKERING)
     #reset game

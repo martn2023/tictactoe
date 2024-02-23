@@ -19,7 +19,9 @@ player_id = 1  #this will flip between the 2 players as 1 vs -1
 
 x_marker_color = (0,255,0) #green for player 1
 o_marker_color = (255,0,0) #red for player -1
+font_color = (0,0,255)
 
+font = pygame.font.SysFont(None, 40) ##name, size, bolding, etc
 
 screen = pygame.display.set_mode((screen_width,screen_height))  # initialize the screen: looking for size, flags, depth, display, vsync
 pygame.display.set_caption("TicTacToe - By Martin, using PyGame")
@@ -94,6 +96,17 @@ def check_winner():
         winner = 2
         game_over = True
 
+def draw_winner(winner): ##neds to know who won game before announcement
+    win_text = 'Player ' + str(winner) + 'wins!'
+    win_image = font.render(win_text, True, font_color)
+
+    pygame.draw.rect(screen, o_marker_color, (screen_width//2 -100, screen_height//2-50,200,50))
+    screen.blit(win_image, (screen_width//2 - 100, screen_height//2 -50)) ## new function
+
+    play_again_text = "Play again?"
+    play_again_image = font.render(play_again_text, True, font_color)
+
+
 
 run = True
 while run:
@@ -118,11 +131,10 @@ while run:
             if markers_board[x_coordinate//square_size][y_coordinate//square_size] == 0:  #checking if this is fresh territory
                 markers_board[x_coordinate // square_size][y_coordinate // square_size] = player_id
                 player_id *= -1  #to flip players
-
                 check_winner()
 
         if game_over:
-            run = False
+            draw_winner(winner)
 
     pygame.display.update()
 
