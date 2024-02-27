@@ -21,7 +21,7 @@ x_marker_color = (0,255,0) #green for player 1
 o_marker_color = (255,0,0) #red for player -1
 font_color = (0,0,255)
 
-font = pygame.font.SysFont(None, 40) ##name, size, bolding, etc
+font = pygame.font.SysFont(None, 40) ##name, size, bolding, etc NONE font is acceptable, bc it defaults to one
 
 screen = pygame.display.set_mode((screen_width,screen_height))  # initialize the screen: looking for size, flags, depth, display, vsync
 pygame.display.set_caption("TicTacToe - By Martin, using PyGame")
@@ -100,15 +100,18 @@ def draw_winner(winner): ##neds to know who won game before announcement
     win_text = 'Player ' + str(winner) + 'wins!'
     win_image = font.render(win_text, True, font_color)
 
-    pygame.draw.rect(screen, o_marker_color, (screen_width//2 -100, screen_height//2-50,200,50))
-    screen.blit(win_image, (screen_width//2 - 100, screen_height//2 -50)) ## new function
+    pygame.draw.rect(screen, o_marker_color, (screen_width//2 - 100, screen_height//2-50, 200, 50))
+    screen.blit(
+        win_image,
+        (screen_width//2 - 100, screen_height//2 - 50)
+    ) ## new function
 
     play_again_text = "Play again?"
     play_again_image = font.render(play_again_text, True, font_color)
 
 
 
-run = True
+run = True  #mike heart attack
 while run:
     draw_grid()
     draw_markers()
@@ -118,6 +121,7 @@ while run:
 
         if event.type == pygame.QUIT:
             run = False
+            continue
 
         if event.type == pygame.MOUSEBUTTONDOWN:  #click detection
             clicked_status = True
@@ -133,8 +137,8 @@ while run:
                 player_id *= -1  #to flip players
                 check_winner()
 
-        if game_over:
-            draw_winner(winner)
+    if game_over:
+        draw_winner(winner)
 
     pygame.display.update()
 
